@@ -17,7 +17,8 @@ int main() {
         prefix_days[i] = prefix_days[i - 1] + days_of_month[i];
     }
 
-    int days = prefix_days[m1 - 1] + d1 - prefix_days[m2 - 1] - d2;
+    int days = prefix_days[m2 - 1] + d2 - prefix_days[m1 - 1] - d1;
+    if (days < 0) days += 6;
     cout << name_of_days[days % 7];
 
     return 0;
