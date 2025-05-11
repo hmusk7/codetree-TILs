@@ -8,7 +8,7 @@ int main() {
     cin >> a >> b >> c >> d;
 
     // Please write your code here.
-    cout << (a * 60 + b) - (c * 60 + d);
+    cout << (c * 60 + d) - (a * 60 + b);
 
     return 0;
 }
