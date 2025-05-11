@@ -13,7 +13,8 @@ int main() {
     cin >> a >> b >> c;
 
     // Please write your code here.
-    cout << date_to_min(a, b, c) - date_to_min(11, 11, 11);
+    if (int min = date_to_min(a, b, c)) cout << min - date_to_min(11, 11, 11);
+    else cout << min;
 
     return 0;
 }
