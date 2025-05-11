@@ -8,6 +8,9 @@ constexpr int days_of_month[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30
 int prefix_days[13] = {};
 string name_of_days[7] = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
 
+int get_index(int i) {
+    return (i % 7 + 7) % 7;
+}
 
 int main() {
     cin >> m1 >> d1 >> m2 >> d2;
@@ -18,8 +21,7 @@ int main() {
     }
 
     int days = prefix_days[m2 - 1] + d2 - prefix_days[m1 - 1] - d1;
-    if (days < 0) days += 7;
-    cout << name_of_days[days % 7];
+    cout << name_of_days[get_index(days)];
 
     return 0;
 }
