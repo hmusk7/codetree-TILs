@@ -14,7 +14,7 @@ int main() {
 
     // Please write your code here.
     int total_min = date_to_min(a, b, c);
-    if (total_min) cout << total_min - date_to_min(11, 11, 11);;
+    if (total_min) cout << total_min - date_to_min(11, 11, 11);
     else cout << -1;
 
     return 0;
