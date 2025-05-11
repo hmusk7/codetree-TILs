@@ -7,7 +7,7 @@ int num_of_days[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 int sum_days(int month) {
     int sum;
-    for (int i = 1; i <= month; ++i) {
+    for (int i = month - 1; i > 0; --i) {
         sum += num_of_days[i];
     }
     return sum;
