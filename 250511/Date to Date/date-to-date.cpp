@@ -17,7 +17,7 @@ int main() {
     cin >> m1 >> d1 >> m2 >> d2;
 
     // Please write your code here.
-    cout << sum_days(m2) + d2 - sum_days(m1) - d1;
+    cout << sum_days(m2) + d2 - sum_days(m1) - d1 + 1;
 
 
     return 0;
