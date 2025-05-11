@@ -18,7 +18,7 @@ int main() {
     }
 
     int days = prefix_days[m2 - 1] + d2 - prefix_days[m1 - 1] - d1;
-    if (days < 0) days += 6;
+    if (days < 0) days += 7;
     cout << name_of_days[days % 7];
 
     return 0;
