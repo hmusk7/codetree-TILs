@@ -5,7 +5,7 @@ using namespace std;
 int a, b, c;
 
 int date_to_min(int day, int hour, int min) {
-    if (day < 11 || (day < 11 && hour < 11) || (day < 11 && hour < 11 && min < 11)) return 0;
+    if (day < 11 || (day >= 11 && hour < 11) || (day >= 11 && hour >= 11 && min < 11)) return 0;
     return day * 24 * 60 + hour * 60 + min;
 }
 
