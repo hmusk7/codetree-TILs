@@ -1,5 +1,6 @@
 #include <iostream>
 #include <unordered_map>
+#include <vector>
 
 #define WHITE 0
 #define BLACK 1
@@ -12,6 +13,9 @@ char dir[1000];
 struct Section {
     int left = 0;
     int right = 0;
+};
+struct Vec3 : vector<int> {
+    Vec3() : vector<int>(3,0) {}
 };
 
 int main() {
@@ -29,7 +33,7 @@ int main() {
     int pos = 0;
     int prev_turn = -1;
     Section white, black;
-    unordered_map<int, pair<int, int>> mp;
+    unordered_map<int, Vec3> mp;
 
     for (int i = 0; i < n; ++i) {
         if (dir[i] == 'L') {
@@ -39,7 +43,8 @@ int main() {
             prev_turn = WHITE;
 
             for (int i = white.left; i <= white.right; ++i) {
-                mp[i].first++;
+                mp[i][0]++;
+                mp[i][2] = WHITE;
             }
         }
 
@@ -50,7 +55,8 @@ int main() {
             prev_turn = BLACK;
 
             for (int i = black.left; i <= black.right; ++i) {
-                mp[i].second++;
+                mp[i][1]++;
+                mp[i][2] = BLACK;
             }
         }
     }
@@ -59,13 +65,15 @@ int main() {
     int right = (black.right <= white.right) ? white.right : black.right;
     int white_count = 0, black_count = 0, gray_count = 0;
     for (int i = left; i <= right; ++i) {
-        if (mp[i].first >= 2 && mp[i].second >= 2) gray_count++;
-        else if (white.left <= i && i <= white.right && black.left <= i && i <= black.right) {
-            if (prev_turn == WHITE) white_count++;
-            else black_count++;
+        if (mp[i][0] >= 2 && mp[i][1] >= 2) {
+            gray_count++;
         }
-        else if (white.left <= i && i <= white.right) white_count++;
-        else if (black.left <= i && i <= black.right) black_count++;
+        else if (white.left <= i && i <= white.right && mp[i][2] == WHITE) {
+            white_count++;
+        }
+        else if (black.left <= i && i <= black.right && mp[i][2] == BLACK) {
+            black_count++;
+        }
     }
 
     cout << white_count << " " << black_count << " " << gray_count;
