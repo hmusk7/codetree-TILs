@@ -13,16 +13,15 @@ char dir[1000];
 deque<int> dq;
 
 void flip_to_right(int i) {
-    int pop_count = 0, push_count = 0;
+    int push_count = 0;
 
     for (int j = 0; j < x[i]; ++j) {
         if (dq.empty()) {
             dq.push_front(BLACK);
             push_count++;
         }
-        else if (dq.front() == WHITE) {
+        else {
             dq.pop_front();
-            pop_count++;
         }
     }
 
@@ -32,18 +31,18 @@ void flip_to_right(int i) {
 }
 
 void flip_to_left(int i) {
-    int pop_count = 0, push_count = 0;
+    int push_count = 0;
     
     for (int j = 0; j < x[i]; ++j) {
         if (dq.empty()) {
             dq.push_back(WHITE);
             push_count++;
         }
-        else if (dq.back() == BLACK) {
+        else {
             dq.pop_back();
-            pop_count++;
         }
     }
+
     for (int j = push_count; j < x[i]; ++j) {
         dq.push_back(WHITE);
     }
