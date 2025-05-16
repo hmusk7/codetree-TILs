@@ -28,7 +28,7 @@ int main() {
     int days = calculate_days();
     if (days == 0) {
         cout << 0;
-        return;
+        return 0;
     }
     else {
         for (int i = 0; i < 7; ++i) {
