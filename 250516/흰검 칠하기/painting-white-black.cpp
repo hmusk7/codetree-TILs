@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <vector>
+#include <algorithm>
 
 #define WHITE 0
 #define BLACK 1
@@ -37,7 +38,7 @@ int main() {
 
     for (int i = 0; i < n; ++i) {
         if (dir[i] == 'L') {
-            if (prev_turn == BLACK) white.right = pos;
+            if (prev_turn == BLACK) white.right = max(pos, white.right);
             pos = pos - x[i] + 1;
             white.left = pos;
             prev_turn = WHITE;
@@ -49,7 +50,7 @@ int main() {
         }
 
         else {
-            if (prev_turn == WHITE) black.left = pos;
+            if (prev_turn == WHITE) black.left = min(pos, black.left);
             pos = pos + x[i] - 1;
             black.right = pos;
             prev_turn = BLACK;
