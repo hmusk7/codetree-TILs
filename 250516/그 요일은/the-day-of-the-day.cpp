@@ -26,11 +26,17 @@ int main() {
     // Please write your code here.
     int ans;
     int days = calculate_days();
-    for (int i = 0; i < 7; ++i) {
-        if (A == DAY_OF_WEEK[i]) {
-            days -= i;
-            ans = days / 7 + 1;
-            break;
+    if (days == 0) {
+        cout << 0;
+        return;
+    }
+    else {
+        for (int i = 0; i < 7; ++i) {
+            if (A == DAY_OF_WEEK[i]) {
+                days -= i;
+                ans = days / 7 + 1;
+                break;
+            }
         }
     }
 
