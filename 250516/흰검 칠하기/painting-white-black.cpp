@@ -1,8 +1,8 @@
 #include <iostream>
 #include <unordered_map>
 
-#define WHITE 1
-#define BLACK 2
+#define WHITE 0
+#define BLACK 1
 
 using namespace std;
 
@@ -27,7 +27,7 @@ int main() {
     // Please write your code here.
     // 0에서 출발한다고 가정
     int pos = 0;
-    int prev_turn = 0;
+    int prev_turn = -1;
     Section white, black;
     unordered_map<int, pair<int, int>> mp;
 
@@ -39,8 +39,7 @@ int main() {
             prev_turn = WHITE;
 
             for (int i = white.left; i <= white.right; ++i) {
-                if (mp[i].second == BLACK) mp[i].first++;
-                mp[i].second = WHITE;
+                mp[i].first++;
             }
         }
 
@@ -51,8 +50,7 @@ int main() {
             prev_turn = BLACK;
 
             for (int i = black.left; i <= black.right; ++i) {
-                if (mp[i].second == WHITE) mp[i].first++;
-                mp[i].second = BLACK;
+                mp[i].second++;
             }
         }
     }
@@ -61,9 +59,13 @@ int main() {
     int right = (black.right <= white.right) ? white.right : black.right;
     int white_count = 0, black_count = 0, gray_count = 0;
     for (int i = left; i <= right; ++i) {
-        if (mp[i].first >= 3) gray_count++;
+        if (mp[i].first >= 2 && mp[i].second >= 2) gray_count++;
+        else if (white.left <= i && i <= white.right && black.left <= i && i <= black.right) {
+            if (prev_turn == WHITE) white_count++;
+            else black_count++;
+        }
         else if (white.left <= i && i <= white.right) white_count++;
-        else black_count++;
+        else if (black.left <= i && i <= black.right) black_count++;
     }
 
     cout << white_count << " " << black_count << " " << gray_count;
