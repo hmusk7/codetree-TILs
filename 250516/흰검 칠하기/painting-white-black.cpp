@@ -44,7 +44,7 @@ int main() {
             prev_turn = WHITE;
 
             for (int i = white.left; i <= white.right; ++i) {
-                mp[i][0]++;
+                mp[i][WHITE]++;
                 mp[i][2] = WHITE;
             }
         }
@@ -56,25 +56,19 @@ int main() {
             prev_turn = BLACK;
 
             for (int i = black.left; i <= black.right; ++i) {
-                mp[i][1]++;
+                mp[i][BLACK]++;
                 mp[i][2] = BLACK;
             }
         }
     }
 
-    int left = (white.left <= black.left) ? white.left : black.left;
-    int right = (black.right <= white.right) ? white.right : black.right;
+    int left = min(white.left, black.left);
+    int right = max(white.right, black.right);
     int white_count = 0, black_count = 0, gray_count = 0;
     for (int i = left; i <= right; ++i) {
-        if (mp[i][0] >= 2 && mp[i][1] >= 2) {
-            gray_count++;
-        }
-        else if (white.left <= i && i <= white.right && mp[i][2] == WHITE) {
-            white_count++;
-        }
-        else if (black.left <= i && i <= black.right && mp[i][2] == BLACK) {
-            black_count++;
-        }
+        if (mp[i][0] >= 2 && mp[i][1] >= 2) gray_count++;
+        else if (mp[i][2] == WHITE) white_count++;
+        else if (mp[i][2] == BLACK) black_count++;
     }
 
     cout << white_count << " " << black_count << " " << gray_count;
