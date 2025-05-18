@@ -5,7 +5,6 @@
 
 #define WHITE 0
 #define BLACK 1
-const int INF = 1e9;
 
 using namespace std;
 
@@ -37,6 +36,7 @@ int main() {
     int prev_pos;
     Window white, black;
     unordered_map<int, Vec3> mp;
+    mp.reserve(n * 100);
 
     for (int i = 0; i < n; ++i) {
         if (dir[i] == 'L') {
@@ -67,7 +67,7 @@ int main() {
     }
 
     int white_count = 0, black_count = 0, gray_count = 0;
-    for (auto v : mp) {
+    for (auto &v : mp) {
         if (v.second[WHITE] >= 2 && v.second[BLACK] >= 2) gray_count++;
         else if (v.second[2] == WHITE) white_count++;
         else black_count++;
