@@ -5,13 +5,14 @@
 
 #define WHITE 0
 #define BLACK 1
+const int INF = 1e9;
 
 using namespace std;
 
 int n;
 int x[1000];
 char dir[1000];
-struct Section {
+struct Window {
     int left = 0;
     int right = 0;
 };
@@ -33,17 +34,19 @@ int main() {
     // 0에서 출발한다고 가정
     int pos = 0;
     int prev_turn = -1;
-    Section white, black;
+    int prev_pos;
+    Window white, black;
     unordered_map<int, Vec3> mp;
 
     for (int i = 0; i < n; ++i) {
         if (dir[i] == 'L') {
             if (prev_turn == BLACK) white.right = max(pos, white.right);
+            prev_pos = pos;
             pos = pos - x[i] + 1;
             white.left = pos;
             prev_turn = WHITE;
 
-            for (int i = white.left; i <= white.right; ++i) {
+            for (int i = white.left; i <= prev_pos; ++i) {
                 mp[i][WHITE]++;
                 mp[i][2] = WHITE;
             }
@@ -51,19 +54,21 @@ int main() {
 
         else {
             if (prev_turn == WHITE) black.left = min(pos, black.left);
+            prev_pos = pos;
             pos = pos + x[i] - 1;
             black.right = pos;
             prev_turn = BLACK;
 
-            for (int i = black.left; i <= black.right; ++i) {
+            for (int i = prev_pos; i <= black.right; ++i) {
                 mp[i][BLACK]++;
                 mp[i][2] = BLACK;
             }
         }
     }
+
     int white_count = 0, black_count = 0, gray_count = 0;
     for (auto v : mp) {
-        if (v.second[0] >= 2 && v.second[1] >=2) gray_count++;
+        if (v.second[WHITE] >= 2 && v.second[BLACK] >= 2) gray_count++;
         else if (v.second[2] == WHITE) white_count++;
         else black_count++;
     }
