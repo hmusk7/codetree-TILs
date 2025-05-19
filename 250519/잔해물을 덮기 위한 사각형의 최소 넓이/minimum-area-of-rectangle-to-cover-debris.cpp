@@ -35,7 +35,7 @@ int main() {
         }
     }
 
-    cout << (maxX - minX + 1) * (maxY - minY + 1);
+    cout << ((minX > maxX || minY > maxY) ? 0 : (maxX - minX + 1) * (maxY - minY + 1));
 
     // int i = 0, j = 0;
     // while (grid[i][j] != 1) {
