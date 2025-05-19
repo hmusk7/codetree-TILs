@@ -1,5 +1,4 @@
 #include <iostream>
-#include <utility>
 
 using namespace std;
 
@@ -12,18 +11,15 @@ int main() {
 
     // Please write your code here.
     int grid[2001][2001] = {};
-    int area = 0;
     for (int i = x1[0] + 1000; i < x2[0] + 1000; ++i) {
         for (int j = y1[0] + 1000; j < y2[0] + 1000; ++j) {
             grid[i][j] = 1;
-            area++;
         }
     }
 
     for (int i = x1[1] + 1000; i < x2[1] + 1000; ++i) {
         for (int j = y1[1] + 1000; j < y2[1] + 1000; ++j) {
             if (grid[i][j] == 1) grid[i][j] = 0;
-            area--;
         }
     }
 
@@ -32,10 +28,9 @@ int main() {
         for (int j = y1[0] + 1000; j < y2[0] + 1000; ++j) {
             if (grid[i][j] == 1) {
                 if (minX > i) minX = i;
-                else if (maxX < i) maxX = i;
-                
+                if (maxX < i) maxX = i;
                 if (minY > j) minY = j;
-                else if (maxY < j) maxY = j;
+                if (maxY < j) maxY = j;
             }
         }
     }
